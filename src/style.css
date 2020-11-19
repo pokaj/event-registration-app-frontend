@@ -1,0 +1,17 @@
+body{
+    background-color: #1b262c;
+}
+
+#loading{
+    color: white;
+    text-align: center;
+    margin-top: 29%;
+}
+
+.welcome{
+    margin-top: 1%;
+    margin-left:45%;
+    height: 120px;
+    width: 120px;
+    background-color: white;
+}
