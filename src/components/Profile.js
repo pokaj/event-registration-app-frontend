@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Header from './Header'
+import swal from 'sweetalert';
+import axios from 'axios';
+
 
 class Profile extends Component {
     constructor(props){
@@ -9,9 +12,31 @@ class Profile extends Component {
             last_name: JSON.parse(localStorage.getItem('user')).last_name,
             email: JSON.parse(localStorage.getItem('user')).email,
             username: JSON.parse(localStorage.getItem('user')).username,
-            image: JSON.parse(localStorage.getItem('user')).picture
+            image: JSON.parse(localStorage.getItem('user')).picture,
         }
     }
+
+    handleChangePassword = async (e) => {
+        if(this.oldpassword === undefined || this.password === undefined || this.confirm_pass === undefined) {return swal('Sorry', 'No empty fields allowed', 'error'); }
+        if(this.password !== this.confirm_pass){ return swal('Sorry', 'The passwords entered do not match', 'error'); }
+        const url = 'http://localhost:4000/users/updatepassword';
+        const data = {
+            email: this.state.email,
+            currentpassword: this.oldpassword,
+            newpassword: this.password
+        }
+        const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
+        const response = await axios.post(url, data, {
+            headers: {
+                'Authorization': token
+            }
+        });
+        if(response.data.status === true){
+            return swal('Awesome', `${response.data.message}`, 'success')
+        }else{
+            return swal('Sorry', `${response.data.message}`, 'error')
+        }
+}
     render() {
         return (
             <>
@@ -45,13 +70,13 @@ class Profile extends Component {
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">Email</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="email" defaultValue={this.state.email} placeholder="Email" />
+                                        <input className="form-control" type="email" defaultValue={this.state.email} placeholder="Email" readOnly/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">Username</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="text" defaultValue={this.state.username} placeholder="Username" />
+                                        <input className="form-control" type="text" defaultValue={this.state.username} placeholder="Username" readOnly/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
@@ -67,28 +92,28 @@ class Profile extends Component {
                         <div className="tab-pane" id="changepswd">
                             <form>
                                 <div className="form-group row">
-                                    <label className="col-lg-3 col-form-label form-control-label text-light">Old Password</label>
+                                    <label className="col-lg-3 col-form-label form-control-label text-light">Current Password</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="password" placeholder="old password" />
+                                        <input className="form-control" type="password" placeholder="old password" onChange={e => this.oldpassword = e.target.value}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">New Password</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="password" placeholder="new password" />
+                                        <input className="form-control" type="password" placeholder="new password" onChange={e => this.password = e.target.value}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">Confirm Password</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="password" placeholder="confirm password" />
+                                        <input className="form-control" type="password" placeholder="confirm password" onChange={e => this.confirm_pass = e.target.value}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label"></label>
                                     <div className="col-lg-9">
                                         <input type="reset" className="btn btn-secondary" value="Cancel"/>
-                                        <input type="button" className="btn btn-primary ml-2" value="Confirm"/>
+                                        <input type="button" className="btn btn-primary ml-2" value="Confirm" onClick={this.handleChangePassword}/>
                                     </div>
                                 </div>
                             </form>

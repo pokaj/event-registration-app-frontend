@@ -61,7 +61,7 @@ class Body extends Component{
                     <Card.Body>
                         <Card.Title>{event.title}</Card.Title>
                         <Card.Text>
-                            <p>{event.tagline.slice(0,28)  + ' . . .'}</p>
+                            <span>{event.tagline.slice(0,28)  + ' . . .'}</span>
                         </Card.Text>
                         <Button variant="primary" onClick={() => this.handleFetchEvent(event._id)}>Book Event</Button>
                     </Card.Body>
