@@ -2,8 +2,6 @@ import { React, Component } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 
-// import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
 
 class Login extends Component{
 
@@ -20,7 +18,11 @@ class Login extends Component{
             if(response.data.status === true){
                 localStorage.setItem('user', JSON.stringify(response.data.user[0]));
                 localStorage.setItem('token', JSON.stringify(response.data.token));
-                history.push('/dashboard');
+                if(response.data.user[0].isadmin){
+                    history.push('/admin-dashboard');
+                }else{
+                    history.push('/dashboard');
+                }
             }else{
                 swal("Awesome", `${response.data.message}`, "error");
             }
@@ -43,7 +45,7 @@ class Login extends Component{
 
                         <form className="login100-form validate-form">
                             <span className="login100-form-title">
-                                Member Login
+                                Login
                             </span>
 
                             <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">

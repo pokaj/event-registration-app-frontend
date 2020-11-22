@@ -7,6 +7,9 @@ import Dashboard from './components/Dashboard';
 import Register from './components/Register';
 import Profile from './components/Profile';
 import MyEvents from './components/MyEvents';
+import AdminDashboard from './components/Admin/AdminDashboard';
+import AddEvent from './components/Admin/AddEvent';
+import EventDetails from './components/Admin/EventDetails';
 
 
 class App extends Component{
@@ -20,6 +23,9 @@ class App extends Component{
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <ProtectedRoute exact path='/profile' component={Profile} />
           <ProtectedRoute exact path='/myevents' component={MyEvents} />
+          <ProtectedRoute exact path='/admin-dashboard' component={AdminDashboard} />
+          <ProtectedRoute exact path='/addevent' component={AddEvent} />
+          <ProtectedRoute exact path='/eventdetails' component={EventDetails} />
           <ProtectedRoute component={Dashboard} />
         </Switch>
       </Router>

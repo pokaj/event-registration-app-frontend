@@ -46,25 +46,25 @@ class Profile extends Component {
                 <div className="col-lg-8 order-lg-2">
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
-                            <a href="###" data-target="#edit" data-toggle="tab" className="nav-link active">Edit</a>
+                            <a href="###" data-target="#accountinfo" data-toggle="tab" className="nav-link active">Account Details</a>
                         </li>
                         <li className="nav-item">
                             <a href="###" data-target="#changepswd" data-toggle="tab" className="nav-link">Change Password</a>
                         </li>
                     </ul>
                     <div className="tab-content py-4">
-                        <div className="tab-pane active" id="edit">
+                        <div className="tab-pane active" id="accountinfo">
                             <form>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">First name</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="text" defaultValue={this.state.first_name} placeholder="First name"/>
+                                        <input className="form-control" type="text" defaultValue={this.state.first_name} placeholder="First name" readOnly/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label text-light">Last name</label>
                                     <div className="col-lg-9">
-                                        <input className="form-control" type="text" defaultValue={this.state.last_name} placeholder="Last name"/>
+                                        <input className="form-control" type="text" defaultValue={this.state.last_name} placeholder="Last name" readOnly/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
@@ -82,8 +82,10 @@ class Profile extends Component {
                                 <div className="form-group row">
                                     <label className="col-lg-3 col-form-label form-control-label"></label>
                                     <div className="col-lg-9">
+                                    {/*
                                         <input type="reset" className="btn btn-secondary" value="Cancel"/>
                                         <input type="button" className="btn btn-primary ml-2" value="Save Changes"/>
+                                    */}
                                     </div>
                                 </div>
                             </form>
@@ -122,11 +124,11 @@ class Profile extends Component {
                 </div>
                 <div className="col-lg-4 order-lg-1 text-center">
                     <img src={process.env.PUBLIC_URL + 'assets/' + this.state.image} className="mx-auto img-fluid img-circle d-block text-light rounded-circle" alt="User Profile"/>
-                    <h6 className="mt-2">Upload a different photo</h6>
+                    {/*<h6 className="mt-2">Upload a different photo</h6>
                     <label className="custom-file">
                         <input type="file" id="file" className="custom-file-input"/>
                         <span className="custom-file-control">Choose file</span>
-                    </label>
+        </label>*/}
                 </div>
             </div>
         </div>
