@@ -4,9 +4,20 @@ import swal from 'sweetalert';
 import Axios from 'axios';
 
 class AddEvent extends Component {
-    handleAddEvent = async (event) => {
+    state = {
+        image: null
+    }
+    
+    handleImageChange = (e) => {
+        this.setState({
+          image: e.target.files[0]
+        })
+      };
+
+    handleAddEvent = async (e) => {
+        e.preventDefault();
         if(this.title === undefined || this.venue === undefined || this.date === undefined || this.speaker === undefined || 
-            this.tagline === undefined || this.room_capacity === undefined || this.image === undefined){
+            this.tagline === undefined || this.room_capacity === undefined || this.state.image === null){
                 return swal('Sorry', 'No empty fields allowed', 'error');
             }
         const url = 'http://localhost:4000/admin/addevent'
@@ -18,15 +29,15 @@ class AddEvent extends Component {
             speaker: this.speaker,
             tagline: this.tagline,
             room_capacity: this.room_capacity,
-            image: this.image.slice(12, this.image.length),
+            image: this.state.image.name
         }
+
         const response = await Axios.post(url, data, {
             headers: {
+                'content-type': 'multipart/form-data',
                 'Authorization': token
             }
-        })
-
-        
+        });
     }
     render(){
         return (
@@ -42,7 +53,7 @@ class AddEvent extends Component {
                         </ul>
                         <div className="tab-content py-4">
                             <div className="tab-pane active" id="accountinfo">
-                                <form>
+                                <form onSubmit={this.handleAddEvent}>
                                     <div className="form-group row">
                                         <label className="col-lg-3 col-form-label form-control-label text-light">Title </label>
                                         <div className="col-lg-9">
@@ -82,14 +93,14 @@ class AddEvent extends Component {
                                     <div className="form-group row">
                                         <label className="col-lg-3 col-form-label form-control-label text-light">Image</label>
                                         <div className="col-lg-9">
-                                            <input className="form-control" type="file"  placeholder="Image" onChange={e => this.image = e.target.value}/>
+                                            <input className="form-control" type="file"  placeholder="Image" accept="image/png, image/jpeg"  onChange={this.handleImageChange}/>
                                         </div>
                                     </div>
                                     <div className="form-group row">
                                         <label className="col-lg-3 col-form-label form-control-label"></label>
                                         <div className="col-lg-9">
                                             <input type="reset" className="btn btn-secondary" value="Cancel"/>
-                                            <input type="button" className="btn btn-primary ml-2" value="Save Changes" onClick={this.handleAddEvent}/>
+                                            <input type="submit" className="btn btn-primary ml-2" value="Save Changes"/>
                                         </div>
                                     </div>
                                 </form>

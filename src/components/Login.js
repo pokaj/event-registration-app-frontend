@@ -24,7 +24,7 @@ class Login extends Component{
                     history.push('/dashboard');
                 }
             }else{
-                swal("Awesome", `${response.data.message}`, "error");
+                swal("Sorry", `${response.data.message}`, "error");
             }
 
             
