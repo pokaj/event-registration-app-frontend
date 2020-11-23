@@ -7,12 +7,32 @@ import editIcon from '@iconify-icons/grommet-icons/edit';
 import eyeOutlined from '@iconify-icons/ant-design/eye-outlined';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { WindMillLoading } from 'react-loadingg';
+import '../../style.css';
+
 
 
 
 class EventDetails extends Component {
     state = {
-        data: JSON.parse(localStorage.getItem('events'))
+        loading:true,
+        data: []
+    }
+
+    componentDidMount = async () => {
+        const url = 'http://localhost:4000/admin/getdetails';
+        const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
+        const data = {}
+        const response = await axios.post(url, data, {
+            headers: {
+                'Authorization': token
+            }
+        });
+        localStorage.setItem('events', JSON.stringify(response.data.events));
+        this.setState({
+            data:response.data.events, 
+            loading: false,
+        });
     }
 
     handleDeleteEvent = async (event_id) => {
@@ -55,6 +75,7 @@ class EventDetails extends Component {
         return (
             <>
                 <AdminHeader></AdminHeader>
+                {this.state.loading? <div><WindMillLoading /><p id="loading">Loading...</p></div> : 
                 <div className="container mt-5">
                 <table className="table table-hover table-light">
                 <thead>
@@ -79,15 +100,16 @@ class EventDetails extends Component {
                     <td>{event.room_capacity}</td>
                     <td>{event.current_seat_number}</td>
                     <td>
-                    <Icon icon={eyeOutlined} />
-                    <Icon icon={editIcon} />
-                    <Icon icon={trashcanIcon} onClick={() => this.handleDeleteEvent(event._id)}/>
+                    <Icon className='pointer' icon={eyeOutlined} />
+                    <Icon className='pointer' id='edit' icon={editIcon} />
+                    <Icon className='pointer' id='delete' icon={trashcanIcon} onClick={() => this.handleDeleteEvent(event._id)}/>
                     </td>
                     </tr>
                     ))}
                 </tbody>
                 </table>
                 </div>
+            }
             </>
         )
     }
