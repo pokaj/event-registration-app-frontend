@@ -71,16 +71,16 @@ class EventDetails extends Component {
         });
     }
 
-    handleEditEvent = async (event_id) => {
-        return alert(event_id);
-        const url = `https://event-applications.herokuapp.com/admin//editevent/${event_id}`;
-        const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
-    }
+    // handleEditEvent = async (event_id) => {
+    //     return alert(event_id);
+    //     const url = `https://event-applications.herokuapp.com/admin//editevent/${event_id}`;
+    //     const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
+    // }
 
     render() {
         return (
             <>
-                <AdminHeader></AdminHeader>
+                <AdminHeader />
                 {this.state.loading? <div><WindMillLoading /><p id="loading">Loading...</p></div> :
                     <div className="container mt-5">
                         <table className="table table-hover table-light">

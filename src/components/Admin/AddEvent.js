@@ -29,20 +29,26 @@ class AddEvent extends Component {
             speaker: this.speaker,
             tagline: this.tagline,
             room_capacity: this.room_capacity,
-            image: this.state.image.name
+            image: `uploads/event_pics/${this.state.image.name}`
         }
-
+        
         const response = await Axios.post(url, data, {
             headers: {
-                'content-type': 'multipart/form-data',
                 'Authorization': token
             }
         });
+
+        if(response.status){
+            return swal('Awesome', 'New successfully event created', 'success');
+        }else {
+            swal('Sorry', 'An error occurred', 'error');
+            console.log(response);
+        }
     }
     render(){
         return (
             <>
-                <AdminHeader></AdminHeader>
+                <AdminHeader />
                 <div className="container mt-5">
                 <div className="row my-2">
                     <div className="col-lg-8 order-lg-2">
@@ -97,7 +103,7 @@ class AddEvent extends Component {
                                         </div>
                                     </div>
                                     <div className="form-group row">
-                                        <label className="col-lg-3 col-form-label form-control-label"></label>
+                                        <label className="col-lg-3 col-form-label form-control-label" />
                                         <div className="col-lg-9">
                                             <input type="reset" className="btn btn-secondary" value="Cancel"/>
                                             <input type="submit" className="btn btn-primary ml-2" value="Save Changes"/>
