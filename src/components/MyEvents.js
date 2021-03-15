@@ -57,7 +57,7 @@ class MyEvents extends Component {
                         'Authorization': token,
                     }
                 });
-                swal("You have unregistered for this event.", {
+                swal("You have successfully unregistered for this event.", {
                     icon: "success",
                 });
                 window.location.reload();
