@@ -17,7 +17,7 @@ class MyEvents extends Component {
 
 
     componentDidMount = async () => {
-        const url = 'http://localhost:4000/events/myevents'; 
+        const url = 'https://event-applications.herokuapp.com/events/myevents/';
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
         const data = {
             user_id: JSON.parse(localStorage.getItem('user'))._id
@@ -45,7 +45,7 @@ class MyEvents extends Component {
           })
           .then(async(willDelete) => {
             if (willDelete) {
-                const url = 'http://localhost:4000/events/unattend'; 
+                const url = 'https://event-applications.herokuapp.com/events/unattend';
                 const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
                 const data = {
                     email: JSON.parse(localStorage.getItem('user')).email,

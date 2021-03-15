@@ -8,7 +8,7 @@ class AdminHeader extends Component{
       user: JSON.parse(localStorage.getItem('user'))
     }
     
-    logout = (e) => {
+    logout = () => {
       localStorage.clear();
       window.location.href = "/";
     }

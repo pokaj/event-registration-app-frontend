@@ -12,7 +12,7 @@ class Login extends Component{
             email: this.email,
             password: this.password
         }   
-        const url = 'http://localhost:4000/users/login/';
+        const url = 'https://event-applications.herokuapp.com/users/login/';
         axios.post(url, data)
         .then(response =>{
             if(response.data.status === true){

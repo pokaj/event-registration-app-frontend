@@ -16,7 +16,7 @@ class AdminBody extends Component {
     }
 
     componentDidMount = async () => {
-        const url = 'http://localhost:4000/admin/getdetails';
+        const url = 'https://event-applications.herokuapp.com/admin/getdetails';
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
         const data = {}
         const response = await axios.post(url, data, {

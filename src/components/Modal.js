@@ -12,7 +12,7 @@ class EventsModal extends Component {
     }
 
     registerEvent = async (id)=>{
-      const url = 'http://localhost:4000/events/attend'; 
+      const url = 'https://event-applications.herokuapp.com/events/attend';
       const data = {
         email: JSON.parse(localStorage.getItem('user')).email,
         eventId: id

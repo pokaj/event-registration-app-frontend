@@ -19,7 +19,7 @@ class Profile extends Component {
     handleChangePassword = async (e) => {
         if(this.oldpassword === undefined || this.password === undefined || this.confirm_pass === undefined) {return swal('Sorry', 'No empty fields allowed', 'error'); }
         if(this.password !== this.confirm_pass){ return swal('Sorry', 'The passwords entered do not match', 'error'); }
-        const url = 'http://localhost:4000/users/updatepassword';
+        const url = 'https://event-applications.herokuapp.com/user/updatepassword';
         const data = {
             email: this.state.email,
             currentpassword: this.oldpassword,

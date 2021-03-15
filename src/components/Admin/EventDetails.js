@@ -20,7 +20,7 @@ class EventDetails extends Component {
     }
 
     componentDidMount = async () => {
-        const url = 'http://localhost:4000/admin/getdetails';
+        const url = 'https://event-applications.herokuapp.com/admin/getdetails';
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
         const data = {}
         const response = await axios.post(url, data, {
@@ -46,7 +46,7 @@ class EventDetails extends Component {
           })
           .then(async(willDelete) => {
             if (willDelete) {
-                const url = 'http://localhost:4000/admin/delete_event'; 
+                const url = 'https://event-applications.herokuapp.com/admin/delete_event';
                 const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
                 const data = {
                     event_id: event_id
@@ -73,7 +73,7 @@ class EventDetails extends Component {
 
     handleEditEvent = async (event_id) => {
         return alert(event_id);
-        const url = `http://localhost:4000/admin//editevent/${event_id}`;
+        const url = `https://event-applications.herokuapp.com/admin//editevent/${event_id}`;
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
     }
 

@@ -17,7 +17,7 @@ class Body extends Component{
 }
 
     async componentDidMount(){
-        const url = 'http://localhost:4000/events/';
+        const url = `https://event-applications.herokuapp.com/events/`;
         try {
             const response = await axios.get(url);
             this.setState({data: response.data.events, loading: false});
@@ -27,7 +27,7 @@ class Body extends Component{
     }
 
     async handleFetchEvent(id){
-        const url = `http://localhost:4000/events/${id}`;
+        const url = `https://event-applications.herokuapp.com/events/${id}`;
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`;
         try {
             const response = await axios.get(url, {

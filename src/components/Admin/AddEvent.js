@@ -20,7 +20,7 @@ class AddEvent extends Component {
             this.tagline === undefined || this.room_capacity === undefined || this.state.image === null){
                 return swal('Sorry', 'No empty fields allowed', 'error');
             }
-        const url = 'http://localhost:4000/admin/addevent'
+        const url = 'https://event-applications.herokuapp.com/admin/addevent'
         const token = `Bearer ${JSON.parse(localStorage.getItem('token'))}`
         const data = {
             title: this.title,

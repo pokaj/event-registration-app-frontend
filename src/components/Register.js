@@ -20,7 +20,7 @@ class Register extends Component{
             image: 'uploads/profile_pics/' + this.image.replace(/^.*[\\\/]/, ''),
             password: this.password
         };
-        const url = 'http://localhost:4000/users/signup';
+        const url = 'https://event-applications.herokuapp.com/users/signup';
         axios.post(url, data)
         .then(response =>{
             if(response.data.status === true){
